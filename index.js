@@ -10,14 +10,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.innerHTML += '<div>Storing file...</div>';
     var file = inputFile.files[0];
 
-    new PouchDB('sample').destroy().then(function () {
+    new PouchDB('http://localhost:5984/react_video').destroy().then(function () {
       //
       // IMPORTANT CODE STARTS HERE
       //
-      var db = new PouchDB('sample');
-      return db.putAttachment('mydoc', 'myfile', file, file.type).then(function () {
+      var db = new PouchDB('http://localhost:5984/react_video');
+      return db.putAttachment('mydoc', 'video2', file, file.type).then(function () {
         document.body.innerHTML += '<div>Stored file.</div>';
-        return db.getAttachment('mydoc', 'myfile');
+        return db.getAttachment('mydoc', 'video2');
       }).then(function (blob) {
         var url = URL.createObjectURL(blob);
         document.body.innerHTML += '<div>Filesize: ' + JSON.stringify(Math.floor(blob.size/1024)) + 'KB, Content-Type: ' + JSON.stringify(blob.type) + "</div>";
